@@ -1,0 +1,696 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en" class="dark chrome windows fontawesome-i2svg-active fontawesome-i2svg-complete">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Django Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- App css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/app-creative.min.css' %}" rel="stylesheet" type="text/css" id="light-style" />
+        <link href="{% static 'css/app-creative-dark.min.css' %}" rel="stylesheet" type="text/css" id="dark-style" />
+        <link rel="stylesheet" href="{% static 'css/googleapis.css' %}">
+        <link rel="stylesheet" href="{% static 'css/overlay.css' %}">
+        <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/theme.rtl.css' %}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    </head>
+
+    <body class="loading" data-layout="topnav" data-layout-config='{"layoutBoxed":false,"darkMode":false,"showRightSidebarOnStart": true}'>
+        <!-- Begin page -->
+        <div class="wrapper">
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+
+            <div class="content-page">
+                <div class="content">
+                    <!-- Topbar Start -->
+                    <div class="navbar-custom topnav-navbar topnav-navbar-dark">
+                        <div class="container-fluid">
+
+                            <!-- LOGO -->
+                            <a href="" class="topnav-logo">
+                                <span class="topnav-logo-lg">
+                                    <img src="assets/images/logo-light.png" alt="" height="16">
+                                </span>
+                                <span class="topnav-logo-sm">
+                                    <img src="assets/images/logo_sm_dark.png" alt="" height="16">
+                                </span>
+                            </a>
+
+                            <ul class="list-unstyled topbar-menu float-end mb-0">
+
+
+<!--                                Settigs-->
+
+<!--                                <li class="notification-list">-->
+<!--                                    <a class="nav-link end-bar-toggle" href="javascript: void(0);">-->
+<!--                                        <p class=" noti-icon">settings</p>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+
+                              {% if request.user.is_authenticated %}
+
+                                <li class="dropdown notification-list">
+                                    <a class="nav-link" >
+                                      <div>{{user}}</div>
+                                    </a>
+                                </li>
+                                <li class="dropdown notification-list">
+                                    <a class="nav-link" href="{% url 'logout' %}"  >
+                                      <div>logout</div>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+                            <div class="app-search dropdown">
+                                <form>
+                                    <div class="input-group">
+
+                                        <p>This is automated your data insights </p>
+                                   </div>
+
+                                </form>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="topnav shadow-sm">
+                        <div class="container-fluid">
+                            <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+
+                                <div class="collapse navbar-collapse" id="topnav-menu-content">
+                                    <ul class="navbar-nav">
+                               </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+
+
+                    <div class="container-fluid">
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                        <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        Hi, Your pre-processed dataset saved in current working directory!!!
+                                    </div>
+                                    <h4 class="page-title">Statistics</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="row g-3 mb-3">
+            <div class="col-md-6 col-xxl-3">
+              <div class="card h-md-100 ecommerce-card-min-width">
+                <div class="card-header pb-0">
+                  <h6 class="mb-0 mt-2 d-flex align-items-center">Columns and observations<span class="ms-1 text-400" data-bs-toggle="tooltip" data-bs-placement="top" title="Calculated according to last week's sales"><span class="far fa-question-circle" data-fa-transform="shrink-1"></span></span></h6>
+                </div>
+                <div class="card-body d-flex flex-column ">
+                  <div class="row">
+                    <div class="col">
+                      <p class="font-sans-serif lh-2 mb-1 fs-1">No.of columns</p><span class="badge badge-soft-success rounded-pill ">{{cols}}</span>
+                        <p class="font-sans-serif lh-2 mb-1 fs-1">No.of observations</p><span class="badge badge-soft-success rounded-pill ">{{obser}}</span>
+                      <p class="font-sans-serif lh-2 mb-1 fs-1">No.of missing cells</p><span class="badge badge-soft-success rounded-pill ">{{miss_cells}}</span>
+                        <p class="font-sans-serif lh-2 mb-1 fs-1">No.of missing cells %</p><span class="badge badge-soft-success rounded-pill ">{{miss_cells_percent}}</span>
+
+                    </div>
+                    <div class="col-auto ps-0">
+                      <div class="echart-bar-weekly-sales h-100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xxl-3">
+              <div class="card h-md-100">
+                <div class="card-header pb-0">
+                  <h6 class="mb-0 mt-2">Variables Type Count</h6>
+                </div>
+                <div class="card-body d-flex flex-column ">
+                  <div class="row">
+                    <div class="col">
+                        {% for i in variables_data %}
+                      <p class="font-sans-serif lh-2 mb-1 fs-1"></p><span class="badge badge-soft-success rounded-pill ">{{i}}</span>
+                         {% endfor %}
+                    </div>
+                    <div class="col-auto ps-0">
+                      <div class="echart-bar-weekly-sales h-100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="page-title-box">
+                                        <div class="page-title-right">
+
+                                        </div>
+                                        <h4 class="page-title">Charts(After Data Preprocessed)</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+<!--## date-time chart (Time Series Analysis -- Month) -->
+
+
+{% if date_chart_month %}
+        <div class="row g-3 mb-3">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row flex-between-end">
+                        <div class="col-auto align-self-center">
+                          <h5 class="mb-0" data-anchor="data-anchor">Month wise Analysis</h5>
+                        </div>
+    <!--                    <div class="col-auto ms-auto">-->
+    <!--                      <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist"><button class="btn btn-sm active" data-bs-toggle="pill" data-bs-target="#dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed" type="button" role="tab" aria-controls="dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed" aria-selected="true" id="tab-dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed">Preview</button><button class="btn btn-sm" data-bs-toggle="pill" data-bs-target="#dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e" type="button" role="tab" aria-controls="dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e" aria-selected="false" id="tab-dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e">Code</button></div>-->
+    <!--                    </div>-->
+                      </div>
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="tab-content">
+                        <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed" id="dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed">
+                          <!-- Find the JS file for the following chart at: src/js/charts/chartjs/chart-combo.js-->
+                          <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
+                            <canvas class="max-w-100" id="date-num-chart-month" width="1618" height="500"></canvas>
+                        </div>
+                        <div class="tab-pane code-tab-pane" role="tabpanel" aria-labelledby="tab-dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e" id="dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e"><pre class="scrollbar rounded-1" style="max-height:420px"><code class="language-html">
+    </code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% endif %}
+{% if date_chart_year %}
+
+        <div class="row g-3 mb-3">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row flex-between-end">
+                        <div class="col-auto align-self-center">
+                          <h5 class="mb-0" data-anchor="data-anchor">Year wise analysis</h5>
+                        </div>
+    <!--                    <div class="col-auto ms-auto">-->
+    <!--                      <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist"><button class="btn btn-sm active" data-bs-toggle="pill" data-bs-target="#dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed" type="button" role="tab" aria-controls="dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed" aria-selected="true" id="tab-dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed">Preview</button><button class="btn btn-sm" data-bs-toggle="pill" data-bs-target="#dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e" type="button" role="tab" aria-controls="dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e" aria-selected="false" id="tab-dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e">Code</button></div>-->
+    <!--                    </div>-->
+                      </div>
+                    </div>
+                    <div class="card-body bg-light">
+                      <div class="tab-content">
+                        <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed" id="dom-1df20fe8-3189-4e6b-b7a7-30f378eb1bed">
+                          <!-- Find the JS file for the following chart at: src/js/charts/chartjs/chart-combo.js-->
+                          <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
+                            <canvas class="max-w-100" id="date-num-chart-year" width="1618" height="500"></canvas>
+                        </div>
+                        <div class="tab-pane code-tab-pane" role="tabpanel" aria-labelledby="tab-dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e" id="dom-4680a959-ad47-4b92-a6ed-fa98d4fcea8e"><pre class="scrollbar rounded-1" style="max-height:420px"><code class="language-html">
+    </code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% endif %}
+
+
+
+
+                            {% for data,can_id,x_axis,y_axis,title in uni_data %}
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-4">Line Chart</h4>
+
+                                        <div dir="ltr">
+                                            <div class="mt-3 chartjs-chart" style="height: 320px;">
+                                                <canvas id="{{can_id}}" data-colors="#44badc,#474d56"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+
+
+                            <script>
+
+                                        const config{{can_id}} = {
+                                                type: 'line',
+                                                data: {{data|safe}},
+                                                options: {
+                                                        responsive: true,
+                                                plugins: {
+                                                        title: {
+                                                        display: true,
+                                                        text: '{{title}}',
+                                                         color :'#34568B'
+                                                                },
+                                                            },
+                                                interaction: {
+                                                        intersect: false,
+                                                             },
+                                                scales: {
+                                                        x: {
+                                                            display: true,
+                                                            title: {
+                                                                display: true,
+                                                                text:'{{x_axis}}',
+                                                                 color :'#FF6F61'
+
+                                                                    }
+                                                            },
+                                                        y: {
+                                                            display: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: '{{y_axis}}',
+                                                                 color :'#FF6F61'
+                                                                   },
+
+                                                             }
+                                                        }
+                                                    },
+                                    };
+
+                            </script>
+
+                                    <script>
+                                      const {{can_id}} = new Chart(
+                                        document.getElementById('{{can_id}}'),
+                                        config{{can_id}}
+                                      );
+                                    </script>
+
+
+                            {% endfor %}
+
+
+<!--### here we start bi-variate and multi-variate charts-->
+
+{% for sc_data,c_id,x_axis,y_axis in scatter_data %}
+
+                        <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-4">Scatter Charts</h4>
+
+                                        <div dir="ltr">
+                                            <div class="mt-3 chartjs-chart" style="height: 320px;">
+                                                <canvas id="{{c_id}}" data-colors="#44badc,#474d56"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+
+                             <script>
+
+                                        const config{{c_id}} = {
+                                                type: 'scatter',
+                                                data: {{sc_data|safe}},
+                                                options: {
+                                                        responsive: true,
+                                                plugins: {
+                                                        title: {
+                                                        display: true,
+                                                        text: '{{title}}',
+                                                         color :'#34568B'
+                                                                },
+                                                            },
+                                                interaction: {
+                                                        intersect: false,
+                                                             },
+                                                scales: {
+                                                        x: {
+                                                            display: true,
+                                                            type:'linear',
+                                                            position:'bottom',
+                                                            title: {
+                                                                display: true,
+                                                                text:'{{x_axis}}',
+                                                                 color :'#FF6F61'
+
+                                                                    }
+                                                            },
+                                                        y: {
+                                                            display: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: '{{y_axis}}',
+                                                                 color :'#FF6F61'
+                                                                   },
+
+                                                             }
+                                                        }
+                                                    },
+                                    };
+
+                            </script>
+                            <script>
+                                      const {{c_id}} = new Chart(
+                                        document.getElementById('{{c_id}}'),
+                                        config{{c_id}}
+                                      );
+                            </script>
+
+
+
+
+{% endfor %}
+
+{% for cat_data,cat_id in cat_uni_data  %}
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-4">Categorical Analysis </h4>
+
+                                        <div dir="ltr">
+                                            <div class="mt-3 chartjs-chart" style="height: 320px;">
+                                                <canvas id="{{cat_id}}" data-colors="#44badc,#474d56"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+
+                            <script>
+
+                                        const config{{cat_id}} = {
+                                                type: 'bar',
+                                                data: {{cat_data|safe}},
+                                                options: {
+                                                        responsive: true,
+                                                        indexAxis: 'y',
+                                                plugins: {
+                                                        title: {
+                                                        display: true,
+                                                        text: 'Categorical Analysis on {{cat_id}}',
+                                                         color :'#34568B'
+                                                                },
+                                                            },
+                                                interaction: {
+                                                        intersect: false,
+                                                             },
+                                                scales: {
+                                                        x: {
+                                                            display: true,
+                                                            type:'linear',
+                                                            position:'bottom',
+                                                            title: {
+                                                                display: true,
+                                                                text:'Counts',
+                                                                 color :'#FF6F61'
+
+                                                                    }
+                                                            },
+                                                        y: {
+                                                            display: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: '{{cat_id}}',
+                                                                 color :'#FF6F61'
+                                                                   },
+
+                                                             }
+                                                        }
+                                                    },
+                                    };
+
+                            </script>
+                            <script>
+                                      const {{cat_id}} = new Chart(
+                                        document.getElementById('{{cat_id}}'),
+                                        config{{cat_id}}
+                                      );
+                            </script>
+
+
+
+
+{% endfor %}
+
+                        </div>
+                        <!-- end row-->
+
+                    </div>
+                    <!-- container -->
+
+                </div>
+
+            </div>
+                </div>
+
+
+
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+                <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1" aria-labelledby="settings-offcanvas">
+      <div class="offcanvas-header settings-panel-header bg-shape">
+        <div class="z-index-1 py-1 light">
+          <h5 class="text-white"> <span class="fas fa-palette me-2 fs-0"></span>Settings</h5>
+          <p class="mb-0 fs--1 text-white opacity-75"> Set your own customized style</p>
+        </div><button class="btn-close btn-close-white z-index-1 mt-0" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body scrollbar-overlay px-card" id="themeController">
+        <h5 class="fs-0">Color Scheme</h5>
+        <p class="fs--1">Choose the perfect color mode for your app.</p>
+        <div class="btn-group d-block w-100 btn-group-navbar-style">
+          <div class="row gx-2">
+            <div class="col-6"><input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherLight"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="../../assets/img/generic/falcon-mode-default.jpg" alt=""/></span><span class="label-text">Light</span></label></div>
+            <div class="col-6"><input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherDark"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="../../assets/img/generic/falcon-mode-dark.jpg" alt=""/></span><span class="label-text"> Dark</span></label></div>
+          </div>
+        </div>
+
+      </div>
+    </div><a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
+      <div class="card-body d-flex align-items-center py-md-2 px-2 py-1">
+        <div class="bg-soft-primary position-relative rounded-start" style="height:34px;width:28px">
+          <div class="settings-popover"><span class="ripple"><span class="fa-spin position-absolute all-0 d-flex flex-center"><span class="icon-spin position-absolute all-0 d-flex flex-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.7369 12.3941L19.1989 12.1065C18.4459 11.7041 18.0843 10.8487 18.0843 9.99495C18.0843 9.14118 18.4459 8.28582 19.1989 7.88336L19.7369 7.59581C19.9474 7.47484 20.0316 7.23291 19.9474 7.03131C19.4842 5.57973 18.6843 4.28943 17.6738 3.20075C17.5053 3.03946 17.2527 2.99914 17.0422 3.12011L16.393 3.46714C15.6883 3.84379 14.8377 3.74529 14.1476 3.3427C14.0988 3.31422 14.0496 3.28621 14.0002 3.25868C13.2568 2.84453 12.7055 2.10629 12.7055 1.25525V0.70081C12.7055 0.499202 12.5371 0.297594 12.2845 0.257272C10.7266 -0.105622 9.16879 -0.0653007 7.69516 0.257272C7.44254 0.297594 7.31623 0.499202 7.31623 0.70081V1.23474C7.31623 2.09575 6.74999 2.8362 5.99824 3.25599C5.95774 3.27861 5.91747 3.30159 5.87744 3.32493C5.15643 3.74527 4.26453 3.85902 3.53534 3.45302L2.93743 3.12011C2.72691 2.99914 2.47429 3.03946 2.30587 3.20075C1.29538 4.28943 0.495411 5.57973 0.0322686 7.03131C-0.051939 7.23291 0.0322686 7.47484 0.242788 7.59581L0.784376 7.8853C1.54166 8.29007 1.92694 9.13627 1.92694 9.99495C1.92694 10.8536 1.54166 11.6998 0.784375 12.1046L0.242788 12.3941C0.0322686 12.515 -0.051939 12.757 0.0322686 12.9586C0.495411 14.4102 1.29538 15.7005 2.30587 16.7891C2.47429 16.9504 2.72691 16.9907 2.93743 16.8698L3.58669 16.5227C4.29133 16.1461 5.14131 16.2457 5.8331 16.6455C5.88713 16.6767 5.94159 16.7074 5.99648 16.7375C6.75162 17.1511 7.31623 17.8941 7.31623 18.7552V19.2891C7.31623 19.4425 7.41373 19.5959 7.55309 19.696C7.64066 19.7589 7.74815 19.7843 7.85406 19.8046C9.35884 20.0925 10.8609 20.0456 12.2845 19.7729C12.5371 19.6923 12.7055 19.4907 12.7055 19.2891V18.7346C12.7055 17.8836 13.2568 17.1454 14.0002 16.7312C14.0496 16.7037 14.0988 16.6757 14.1476 16.6472C14.8377 16.2446 15.6883 16.1461 16.393 16.5227L17.0422 16.8698C17.2527 16.9907 17.5053 16.9504 17.6738 16.7891C18.7264 15.7005 19.4842 14.4102 19.9895 12.9586C20.0316 12.757 19.9474 12.515 19.7369 12.3941ZM10.0109 13.2005C8.1162 13.2005 6.64257 11.7893 6.64257 9.97478C6.64257 8.20063 8.1162 6.74905 10.0109 6.74905C11.8634 6.74905 13.3792 8.20063 13.3792 9.97478C13.3792 11.7893 11.8634 13.2005 10.0109 13.2005Z" fill="#2A7BE4"></path></svg></span></span></span></div>
+        </div><small class="text-uppercase text-primary fw-bold bg-soft-primary py-2 pe-2 ps-1 rounded-end">customize</small>
+      </div>
+    </a>
+            </div>
+        </div>
+
+        <div class="rightbar-overlay"></div>
+        <!-- /End-bar -->
+
+<script>
+
+    const config = {
+            type: 'line',
+            data: {{date_chart_month|safe}},
+            options: {
+                    responsive: true,
+            plugins: {
+                    title: {
+                    display: true,
+                    text: 'X-axis (Months) vs Y-axis (Column mean values)',
+                     color :'#34568B'
+                            },
+                        },
+            interaction: {
+                    intersect: false,
+                         },
+            scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text:'Months',
+                             color :'#FF6F61'
+
+                                }
+                        },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Column Mean Values',
+                             color :'#FF6F61'
+                               },
+
+                         }
+                    }
+                },
+};
+
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('date-num-chart-month'),
+    config
+  );
+</script>
+
+
+<script>
+   const config1 = {
+            type: 'line',
+            data: {{date_chart_year|safe}},
+            options: {
+                    responsive: true,
+            plugins: {
+                    title: {
+                    display: true,
+                    text: 'X-axis (Years) vs Y-axis (Column mean values)',
+                    color:'#34568B'
+                            },
+                        },
+            interaction: {
+                    intersect: false,
+                         },
+            scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text:'Years',
+                            color :'#FF6F61'
+                              }
+                        },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Column Mean values',
+                            color :'#FF6F61'
+
+                               },
+
+                         }
+                    }
+                },
+};
+
+</script>
+
+<script>
+  const myChart1 = new Chart(
+    document.getElementById('date-num-chart-year'),
+    config1
+  );
+</script>
+
+
+<script>
+
+    const config3 = {
+            type: 'line',
+            data: {{uni_data|safe}},
+            options: {
+                    responsive: true,
+            plugins: {
+                    title: {
+                    display: true,
+                    text: 'X-axis (Months) vs Y-axis (Column unique values)',
+                     color :'#34568B'
+                            },
+                        },
+            interaction: {
+                    intersect: false,
+                         },
+            scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text:'',
+                             color :'#FF6F61'
+
+                                }
+                        },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Column unique occurrence counts',
+                             color :'#FF6F61'
+                               },
+
+                         }
+                    }
+                },
+};
+
+</script>
+
+<script>
+  const myChart3 = new Chart(
+    document.getElementById('uni_num_data'),
+    config3
+  );
+</script>
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+        <!-- bundle -->
+        <script src="{% static 'js/vendor.js' %}"></script>
+        <script src="{% static 'js/app.min.js' %}"></script>
+
+        <!-- third party js -->
+        <script src="{% static 'js/chart.bundle.min.js' %}"></script>
+        <!-- third party js ends -->
+
+        <!-- demo app -->
+        <script src="{% static 'js/demo.chartjs.js' %}"></script>
+        <!-- end demo js-->
+
+    </body>
+</html>

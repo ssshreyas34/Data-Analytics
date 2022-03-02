@@ -1,0 +1,222 @@
+{% load static %}
+{% load widget_tweaks %}
+<html>
+
+<head>
+    <title>
+        Django Data -  Load a file  | Visualization
+    </title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+		<script src="{% static 'js/html5shiv.js' %}"></script>
+		<script src="{% static 'js/respond.min.js' %}"></script>
+
+
+
+    <link rel="icon" href="{% static 'images/data-visualization-trends.jpg' %}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <!-- animation css -->
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/css/style.css">
+<link href="{% static 'css/bootstrap1.min.css' %}" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tiny_slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme_min.css' %}">
+    <!-- Specific CSS goes HERE -->
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-light d-block navbar-sticky navbar-expand-lg navbar-light bg-primary navbar-inverse navbar-fixed-topnavbar">
+
+          <div class="collapse navbar-collapse me-auto order-lg-2" id="navbarCollapse">
+
+            <div class="d-lg-none py-3">
+              <div class="input-group"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                <input class="form-control rounded-start" type="text" placeholder="What do you need?">
+              </div>
+            </div>
+
+            <ul class="navbar-nav fixed-top nav-tabs card-header-tabs navbar-expand-lg navbar-light bg-light justify-content-center ml-auto">
+<!--             <li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="#" >Follow us</a>-->
+                <div class="dropdown-menu px-2 ps-0 pb-4 dropdown show">
+                  <div class="d-flex">
+
+                  </div>
+                  <div class="d-flex">
+
+                  </div>
+                  <div class="d-flex bg-secondary">
+
+                  </div>
+                </div>
+              </li>
+
+                </li>
+
+
+                {% if user.is_authenticated %}
+
+
+                 <li class="nav-item ">
+
+
+
+                <a class="nav-link dropdown-toggle "  id="logout">Hey {{user}} you are logged please upload dataset</a>
+                </li>
+
+            </ul>
+          </div>
+
+</nav>
+
+
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="feather icon-unlock auth-icon"></i>
+                    </div>
+                    <h3 class="mb-4">
+
+                    </h3>
+
+<!--                    <span class="mb-0 text-muted">-->
+<!--                        You must log with test credentials-->
+<!--                    </span>-->
+
+                    <br />
+                    <br />
+
+
+
+
+                        <a class="btn btn-primary shadow-2 mb-4" href="{% url 'load' %}">upload</a>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+            {% else %}
+                <li class="nav-item ">
+                <a class="nav-link dropdown-toggle " href="{% url 'home' %}" id="Register">Register</a>
+                </li>
+
+
+                <li class="nav-item ">
+                <a class="nav-link dropdown-toggle " href="{% url 'login_form' %}"  id="login">Login</a>
+                </li>
+
+
+<!--                <li class="nav-item ">-->
+<!--                <a class="nav-link dropdown-toggle " href="/admin/login/?next=/admin/" >Admin</a>-->
+<!--                </li>-->
+
+
+
+
+
+
+        </ul>
+        </div>
+
+      </nav>
+
+
+
+
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="feather icon-unlock auth-icon"></i>
+                    </div>
+                    <h3 class="mb-4">
+
+                    </h3>
+                    {% if status %}
+
+                    <span class="mb-0 text-muted">
+                        {{status}}
+                    </span>
+                    {% else %}
+                    <span class="mb-0 text-muted">
+                        your password not part of username
+                    </span>
+                    {% endif %}
+
+
+                    <br />
+                    <br />
+
+                    <form role="form" action="{% url 'home' %}" method="post">
+                        {% csrf_token %}
+                        {% for field in reg_form %}
+                            <div class="input-group mb-3">
+
+<!--                                {{field.label}}-->
+                                {{field.errors}}
+                                {% render_field field class="form-control" %}
+
+
+                            </div>
+                        {% endfor %}
+
+
+                        <button name="login" class="btn btn-primary shadow-2 mb-4">Register</button>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endif %}
+
+    <!-- Required Js -->
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+
+
+    <!-- Specific Page JS goes HERE  -->
+
+
+</body>
+</html>
+
